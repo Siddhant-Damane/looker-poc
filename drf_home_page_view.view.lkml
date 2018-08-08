@@ -35,6 +35,11 @@ view: drf_home_page_view {
     sql: ${TABLE}.application ;;
   }
 
+  dimension: logged_in_status {
+    type: string
+    sql: ${TABLE}.logged_in_status ;;
+  }
+
   dimension_group: created_at_ms_formatted {
     type: time
     datatype: epoch

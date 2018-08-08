@@ -65,6 +65,11 @@ view: registration_view {
     sql: json_extract_path_text(json_extract_array_element_text(${TABLE}.meta_data, 0, true), 'value', true) ;;
   }
 
+  dimension: device_type{
+    description: "type of device"
+    type: string
+    sql: when ${TABLE}.device = 'desktop' then 'desktop' else json_extract_path_text(${TABLE}.device, 'type', true) ;;
+  }
 }
 
 # view: prod_stream_table {

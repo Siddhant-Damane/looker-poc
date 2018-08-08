@@ -74,4 +74,10 @@ view: drf_home_page_view {
     sql: ${TABLE}.meta_data ;;
   }
 
+  dimension: form_field {
+    description: "field clicked"
+    type: string
+    sql: json_extract_path_text(json_extract_array_element_text(${TABLE}.meta_data, 0, true), 'value', true) ;;
+  }
+
 }

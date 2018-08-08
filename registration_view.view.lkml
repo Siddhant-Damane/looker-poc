@@ -68,7 +68,10 @@ view: registration_view {
   dimension: device_type{
     description: "type of device"
     type: string
-    sql: case when ${TABLE}.device = 'desktop' then 'desktop' else json_extract_path_text(${TABLE}.device, 'type', true) ;;
+     sql:CASE
+          WHEN ${TABLE}.device = 'desktop'  THEN 'desktop'
+          ELSE json_extract_path_text( ${TABLE}.device, 'type', true)
+         END ;;
   }
 }
 

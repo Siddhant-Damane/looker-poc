@@ -52,6 +52,13 @@ view: registration_view {
     sql: ${event_type} ;;
     drill_fields: []
   }
+
+  dimension: meta_data {
+    description: "App specific event meta data"
+    type: string
+    sql: ${TABLE}.meta_data ;;
+  }
+
 }
 
 # view: prod_stream_table {

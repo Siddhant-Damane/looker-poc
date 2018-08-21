@@ -39,7 +39,6 @@
         SELECT pst.* FROM public.prod_stream_table pst, latest_event le
         WHERE le.user_tracking_id = pst.user_tracking_id AND pst.created_at_ms = le.latest_created_at
         AND (event_type = 'REGISTER_FIELD_BLUR') AND (application = 'DRF_REGISTRATION'))
-      GROUP BY form_field
              ;;
   }
 
@@ -47,6 +46,15 @@
     description: "field clicked"
     type: string
     sql: json_extract_path_text(json_extract_array_element_text(${TABLE}.meta_data, 0, true), 'value', true) ;;
+  }
+
+  dimension: device_type{
+    description: "type of device"
+    type: string
+    sql:CASE
+          WHEN ${TABLE}.device = 'desktop'  THEN 'desktop'
+          ELSE json_extract_path_text( ${TABLE}.device, 'type', true)
+         END ;;
   }
 
   measure: form_field_count {

@@ -73,8 +73,21 @@ view: registration_view {
           ELSE json_extract_path_text( ${TABLE}.device, 'type', true)
          END ;;
   }
-}
 
+dimension: device_model{
+  description: "device model"
+  type: string
+  sql: CASE
+        WHEN ${TABLE}.device = 'desktop' THEN 'desktop'
+        WHEN ${TABLE}.device = 'console' THEN 'console'
+        WHEN ${TABLE}.device = 'smarttv' THEN 'smarttv'
+        WHEN json_extract_path_text(${TABLE}.device, 'vendor') = 'Apple' THEN 'Apple'
+        WHEN json_extract_path_text(${TABLE}.device, 'vendor') = 'Microsoft' THEN 'Microsoft'
+        WHEN json_extract_path_text(${TABLE}.device, 'vendor') = 'BlackBerry' THEN 'BlackBerry'
+        ELSE 'Android'
+      END ;;
+      }
+}
 # view: prod_stream_table {
 #   # Or, you could make this view a derived table, like this:
 #   derived_table: {

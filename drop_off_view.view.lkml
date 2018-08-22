@@ -38,7 +38,12 @@
       GROUP BY user_tracking_id )
         SELECT pst.* FROM public.prod_stream_table pst, latest_event le
         WHERE le.user_tracking_id = pst.user_tracking_id AND pst.created_at_ms = le.latest_created_at
-        AND (event_type = 'REGISTER_FIELD_BLUR') AND (application = 'DRF_REGISTRATION'))
+        AND (event_type = 'REGISTER_FIELD_BLUR') AND (application = 'DRF_REGISTRATION')
+        AND NOT EXISTS (
+          SELECT ipst.user_tracking_id FROM public.prod_stream_table ipst
+          WHERE (ipst.event_type = 'REGISTER_CREATE_ACCOUNT'
+            OR ipst.event_type = 'REGISTER_CREATE_GAMING_ACCOUNT' OR ipst.event_type = 'REGISTER_LOGIN' )
+          AND ipst.user_tracking_id = pst.user_tracking_id ))
              ;;
   }
 

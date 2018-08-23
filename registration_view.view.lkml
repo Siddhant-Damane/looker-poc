@@ -81,13 +81,25 @@ dimension: device_model{
         WHEN ${TABLE}.device = 'desktop' THEN 'desktop'
         WHEN ${TABLE}.device = 'console' THEN 'console'
         WHEN ${TABLE}.device = 'smarttv' THEN 'smarttv'
-        WHEN json_extract_path_text(${TABLE}.device, 'vendor') = 'Apple' THEN 'Apple'
-        WHEN json_extract_path_text(${TABLE}.device, 'vendor') = 'Microsoft' THEN 'Microsoft'
-        WHEN json_extract_path_text(${TABLE}.device, 'vendor') = 'BlackBerry' THEN 'BlackBerry'
-        ELSE 'Android'
+        WHEN json_extract_path_text(${TABLE}.device, 'vendor') = '' AND json_extract_path_text(${TABLE}.device, 'model') = '' AND json_extract_path_text(${TABLE}.device, 'type') = 'tablet' THEN 'Tablet, Device Unknown'
+        WHEN json_extract_path_text(${TABLE}.device, 'type') = 'tablet' AND json_extract_path_text(${TABLE}.device, 'vendor') = 'Apple' THEN 'Apple Tablet'
+        WHEN json_extract_path_text(${TABLE}.device, 'type') = 'tablet' AND json_extract_path_text(${TABLE}.device, 'vendor') = 'Microsoft' THEN 'Microsoft Tablet'
+        WHEN json_extract_path_text(${TABLE}.device, 'type') = 'tablet' AND json_extract_path_text(${TABLE}.device, 'vendor') != '' THEN 'Android Tablet'
+        WHEN json_extract_path_text(${TABLE}.device, 'type') = 'mobile' AND json_extract_path_text(${TABLE}.device, 'vendor') = 'Apple' THEN 'Apple Mobile'
+        WHEN json_extract_path_text(${TABLE}.device, 'type') = 'mobile' AND json_extract_path_text(${TABLE}.device, 'vendor') = 'Microsoft' THEN 'Microsoft Mobile'
+        WHEN json_extract_path_text(${TABLE}.device, 'type') = 'mobile' AND json_extract_path_text(${TABLE}.device, 'vendor') = 'BlackBerry' THEN 'BlackBerry Mobile'
+        WHEN json_extract_path_text(${TABLE}.device, 'vendor') = '' AND json_extract_path_text(${TABLE}.device, 'model') = '' AND json_extract_path_text(${TABLE}.device, 'type') = 'mobile' THEN 'Mobile, Device Unknown'
+        ELSE 'Android, Mobile'
       END ;;
       }
-}
+
+dimension: source {
+  description: "Source"
+  type: string
+  sql:  ${TABLE}.source ;;
+  }
+  }
+
 # view: prod_stream_table {
 #   # Or, you could make this view a derived table, like this:
 #   derived_table: {

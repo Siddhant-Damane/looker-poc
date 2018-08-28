@@ -98,6 +98,24 @@ dimension: source {
   type: string
   sql:  ${TABLE}.source ;;
   }
+
+dimension: DRF_Customer_ID {
+  description: "DRF Customer ID"
+  type: string
+  sql:  ${TABLE}.drf_user_id ;;
+}
+
+dimension: User_Tracking_ID {
+  description: "User Tracking ID"
+  type: string
+  sql:  ${TABLE}.user_tracking_id ;;
+}
+
+dimension: XPB_ID {
+  description: "XPB User ID"
+  type: string
+  sql:  ${TABLE}.xpb_user_id ;;
+}
   }
 
 # view: prod_stream_table {

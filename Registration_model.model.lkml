@@ -18,3 +18,4 @@ include: "*.dashboard.lookml"  # include all dashboards in this project
 #   }
 # }
 explore: registration_view {}
+explore: user_funnel_view {}

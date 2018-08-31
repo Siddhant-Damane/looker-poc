@@ -19,3 +19,7 @@ include: "*.dashboard.lookml"  # include all dashboards in this project
 # }
 explore: registration_view {}
 explore: user_funnel_view {}
+explore: play_user_count {}
+explore: count_of_play_user_by_device {}
+explore: famous_drf_play_clicked_url {}
+explore: average_number_of_clicks_by_user {}

@@ -23,3 +23,5 @@ explore: play_user_count {}
 explore: count_of_play_user_by_device {}
 explore: famous_drf_play_clicked_url {}
 explore: average_number_of_clicks_by_user {}
+explore: play_event_count_by_user {}
+explore: count_of_tracks_per_user {}

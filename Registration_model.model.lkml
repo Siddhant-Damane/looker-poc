@@ -25,3 +25,6 @@ explore: famous_drf_play_clicked_url {}
 explore: average_number_of_clicks_by_user {}
 explore: play_event_count_by_user {}
 explore: count_of_tracks_per_user {}
+explore: single_page_view_users {}
+explore: total_count_of_users_with_single_page_view {}
+explore: count_of_users_with_tracks {}

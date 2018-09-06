@@ -28,3 +28,4 @@ explore: count_of_tracks_per_user {}
 explore: single_page_view_users {}
 explore: total_count_of_users_with_single_page_view {}
 explore: count_of_users_with_tracks {}
+explore: user_count_with_no_track_data {}

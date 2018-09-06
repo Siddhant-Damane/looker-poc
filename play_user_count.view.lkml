@@ -1,16 +1,22 @@
 view: play_user_count {
   derived_table: {
-    sql: SELECT COUNT(DISTINCT ss.drf_user_id) from public.prod_stream_table ss
+    sql: SELECT DISTINCT ss.drf_user_id from public.prod_stream_table ss
        where ss.location_url like 'https://play.drf.com/%'
        ;;
   }
 
-  dimension: count {
-    type: number
-    sql: ${TABLE}.count ;;
+  measure: count {
+    type: count
+    drill_fields: [detail*]
   }
 
+ dimension: drf_user_id {
+  type: string
+  sql: ${TABLE}.drf_user_id ;;
+}
+
   set: detail {
-    fields: [count]
+    fields: [drf_user_id]
   }
+
 }

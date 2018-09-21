@@ -30,3 +30,4 @@ explore: total_count_of_users_with_single_page_view {}
 # explore: count_of_users_with_tracks {}
 explore: user_count_with_no_track_data {}
 explore: count_events_per_day {}
+explore: active_users_per_day {}

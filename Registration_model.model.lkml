@@ -32,3 +32,5 @@ explore: user_count_with_no_track_data {}
 explore: count_events_per_day {}
 explore: active_users_per_day {}
 explore: user_signup_through_offer_page {}
+explore: user_signup_through_fb_page {}
+explore: user_signup_through_join_page {}

@@ -2,7 +2,7 @@ view: user_signup_through_offer_page {
   derived_table: {
     sql:select public.prod_stream_table.drf_user_id from public.prod_stream_table where public.prod_stream_table.user_tracking_id in (SELECT play_user_count.user_tracking_id
       FROM public.prod_stream_table  AS play_user_count
-      WHERE play_user_count.location_url LIKE '%promos.drf.com/fb%' AND play_user_count.event_type = 'PAGE_LOAD'
+      WHERE play_user_count.location_url LIKE '%promos.drf.com/offer%' AND play_user_count.event_type = 'PAGE_LOAD'
       group by play_user_count.user_tracking_id
       HAVING min(play_user_count.created_at_ms)  <
       (select max(play_user_count2.created_at_ms) FROM public.prod_stream_table  AS play_user_count2

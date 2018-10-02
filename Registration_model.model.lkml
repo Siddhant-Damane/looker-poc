@@ -34,3 +34,4 @@ explore: active_users_per_day {}
 explore: user_signup_through_offer_page {}
 explore: user_signup_through_fb_page {}
 explore: user_signup_through_join_page {}
+explore: users_not_beta_users {}

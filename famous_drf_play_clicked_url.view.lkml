@@ -50,6 +50,12 @@ view: famous_drf_play_clicked_url {
     drill_fields: []
   }
 
+  dimension: DRF_Customer_ID {
+    description: "DRF Customer ID"
+    type: string
+    sql: ${TABLE}.drf_user_id ;;
+  }
+
 
 
 }

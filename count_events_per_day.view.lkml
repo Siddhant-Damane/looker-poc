@@ -43,6 +43,12 @@ view: count_events_per_day {
     drill_fields: []
   }
 
+  dimension: DRF_Customer_ID {
+    description: "DRF Customer ID"
+    type: string
+    sql: ${TABLE}.drf_user_id ;;
+  }
+
 
 }
 

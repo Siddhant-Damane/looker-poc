@@ -35,3 +35,4 @@ explore: user_signup_through_offer_page {}
 explore: user_signup_through_fb_page {}
 explore: user_signup_through_join_page {}
 explore: users_not_beta_users {}
+explore: list_of_non_beta_users {}

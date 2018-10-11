@@ -132,9 +132,9 @@ view: count_of_tracks_per_user {
       FROM public.prod_stream_table  AS count_of_tracks_per_user WHERE (count_of_tracks_per_user.location_url LIKE '%https://play.drf.com/#/pp-details%')
       AND (count_of_tracks_per_user.drf_user_id IS NOT NULL))
       union
-      (select public.prod_stream_table.drf_user_id, json_extract_path_text(json_extract_array_element_text(public.prod_stream_table.meta_data,1),'value'),
+      (select public.prod_stream_table.drf_user_id, json_extract_path_text(json_extract_array_element_text(public.prod_stream_table.meta_data,(json_array_length(public.prod_stream_table.meta_data)-1)),'value'),
        DATE(CONVERT_TIMEZONE('UTC', 'America/New_York', (timestamp 'epoch' + CAST(public.prod_stream_table.created_at_ms AS BIGINT) / 1000 * interval '1 second'))) FROM public.prod_stream_table
-      where public.prod_stream_table.event_type = 'CLICK_ON_PP_VIEW' and  json_extract_path_text(json_extract_array_element_text(public.prod_stream_table.meta_data,1),'key') = 'trackId'
+      where public.prod_stream_table.event_type = 'CLICK_ON_PP_VIEW' and  json_extract_path_text(json_extract_array_element_text(public.prod_stream_table.meta_data,(json_array_length(public.prod_stream_table.meta_data)-1)),'key') = 'trackId'
       and public.prod_stream_table.drf_user_id IS NOT NULL))
       ;;
   }

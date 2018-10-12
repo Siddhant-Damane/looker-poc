@@ -22,22 +22,48 @@ explore: user_funnel_view {}
 explore: play_user_count {
   sql_always_where: ${DRF_Customer_ID} is not Null;;
 }
-explore: count_of_play_user_by_device {}
-explore: famous_drf_play_clicked_url {}
-explore: average_number_of_clicks_by_user {}
+explore: count_of_play_user_by_device {
+  sql_always_where: ${DRF_Customer_ID} is not Null;;
+}
+explore: famous_drf_play_clicked_url {
+  sql_always_where: ${DRF_Customer_ID} is not Null;;
+}
+explore: average_number_of_clicks_by_user {
+  sql_always_where: ${DRF_Customer_ID} is not Null;;
+}
 explore: play_event_count_by_user {
   sql_always_where: ${DRF_Customer_ID} is not Null;;
 }
-explore: count_of_tracks_per_user {}
-explore: single_page_view_users {}
+explore: count_of_tracks_per_user {
+  sql_always_where: ${drf_user_id} is not Null;;
+}
+explore: single_page_view_users {
+  sql_always_where: ${drf_user_id} is not Null;;
+}
 explore: total_count_of_users_with_single_page_view {}
 # explore: count_of_users_with_tracks {}
-explore: user_count_with_no_track_data {}
-explore: count_events_per_day {}
-explore: active_users_per_day {}
-explore: user_signup_through_offer_page {}
-explore: user_signup_through_fb_page {}
-explore: user_signup_through_join_page {}
-explore: users_not_beta_users {}
-explore: list_of_non_beta_users {}
+explore: user_count_with_no_track_data {
+  sql_always_where: ${drf_user_id} is not Null;;
+}
+explore: count_events_per_day {
+  sql_always_where: ${DRF_Customer_ID} is not Null;;
+}
+explore: active_users_per_day {
+  sql_always_where: ${DRF_Customer_ID} is not Null;;
+}
+explore: user_signup_through_offer_page {
+  sql_always_where: ${DRF_Customer_ID} is not Null;;
+}
+explore: user_signup_through_fb_page {
+  sql_always_where: ${DRF_Customer_ID} is not Null;;
+}
+explore: user_signup_through_join_page {
+  sql_always_where: ${DRF_Customer_ID} is not Null;;
+}
+explore: users_not_beta_users {
+  sql_always_where: ${drf_user_id} is not Null;;
+}
+explore: list_of_non_beta_users {
+  sql_always_where: ${drf_user_id} is not Null;;
+}
 # explore: non_beta_users_dummy {}

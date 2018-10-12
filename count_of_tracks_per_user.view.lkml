@@ -163,7 +163,7 @@ view: count_of_tracks_per_user {
   }
 
   dimension: drf_user_id {
-    type: number
+    type: string
     sql: ${TABLE}.drf_user_id ;;
   }
 

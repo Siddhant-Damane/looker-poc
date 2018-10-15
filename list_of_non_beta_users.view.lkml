@@ -60,6 +60,7 @@ view: list_of_non_beta_users {
 
   dimension: min_non_beta_user_date {
     type: date
+    convert_tz: no
 
   }
   set: detail {

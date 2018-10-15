@@ -35,7 +35,7 @@ view: list_of_non_beta_users {
     }
 
     dimension: drf_user_id {
-      type: number
+      type: string
       sql: ${TABLE}.drf_user_id ;;
     }
 

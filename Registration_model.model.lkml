@@ -66,6 +66,6 @@ explore: users_not_beta_users {
 explore: list_of_non_beta_users {
   sql_always_where: ${drf_user_id} is not Null;;
 }
-explore: play_per_user_each_week {
+explore: user_count {
 #   sql_always_where: ${DRF_Customer_ID} is not Null;;
 }

@@ -167,6 +167,12 @@ view: count_of_tracks_per_user {
     sql: ${TABLE}.drf_user_id ;;
   }
 
+
+  measure: distinct_user_id {
+    type: count_distinct
+    sql:${TABLE}.drf_user_id ;;
+  }
+
   dimension: track_id {
     type: string
   }

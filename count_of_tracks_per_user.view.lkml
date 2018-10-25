@@ -23,8 +23,8 @@
 #     type: string
 #     sql: ${TABLE}.created_at ;;
 #   }
-#
-#   dimension: created_at_ms {
+  #
+  #   dimension: created_at_ms {
 #     type: number
 #     sql: ${TABLE}.created_at_ms ;;
 #   }
@@ -125,6 +125,7 @@ view: count_of_tracks_per_user {
 #     suggest_dimension: created_at_ms
 #     type: number
 #   }
+
   derived_table: {
     sql:
      ((SELECT count_of_tracks_per_user.drf_user_id, trim(regexp_substr(trim(count_of_tracks_per_user.location_url, regexp_substr(count_of_tracks_per_user.location_url,'https://play.drf.com/#/pp-details/[0-9]*-[0-9]*-[0-9]*')),'[A-Z]*')) AS "track_id",
@@ -187,6 +188,11 @@ view: count_of_tracks_per_user {
     convert_tz:no
   }
 
+  dimension: week {
+#     type: date
+    convert_tz: no
+    sql: TO_CHAR(DATE_TRUNC('week', ${date}), 'YYYY-MM-DD');;
+  }
   set: detail {
     fields: [drf_user_id,track_id]
   }

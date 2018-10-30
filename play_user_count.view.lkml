@@ -43,6 +43,31 @@ view: play_user_count {
     drill_fields: []
   }
 
+  dimension: XPB_ID {
+    description: "XPB User ID"
+    type: string
+    sql:  ${TABLE}.xpb_user_id ;;
+  }
+
+  dimension: User_Tracking_ID {
+    description: "User Tracking ID"
+    type: string
+    sql:  ${TABLE}.user_tracking_id ;;
+  }
+
+  measure: distinct_User_Tracking_ID {
+    description: "count of user tracking id"
+    type: count_distinct
+    sql: ${User_Tracking_ID} ;;
+    drill_fields: []
+  }
+
+  measure: distinct_XPB_ID{
+    description: "count of user XPB_ID"
+    type: count_distinct
+    sql: ${XPB_ID} ;;
+    drill_fields: []
+  }
 
 }
 

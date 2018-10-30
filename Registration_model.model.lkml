@@ -19,8 +19,9 @@ include: "*.dashboard.lookml"  # include all dashboards in this project
 # }
 explore: registration_view {}
 explore: user_funnel_view {}
+#Paly Dashboard Views
 explore: play_user_count {
-  sql_always_where: ${DRF_Customer_ID} is not Null;;
+#   sql_always_where: ${DRF_Customer_ID} is not Null;;
 }
 explore: count_of_play_user_by_device {
   sql_always_where: ${DRF_Customer_ID} is not Null;;
@@ -69,3 +70,8 @@ explore: list_of_non_beta_users {
 explore: user_count {
 #   sql_always_where: ${DRF_Customer_ID} is not Null;;
 }
+
+# Bets Dashboard Views
+# explore: bets_user_count {
+#   sql_always_where: ${DRF_Customer_ID} is not Null;;
+# }

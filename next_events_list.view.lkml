@@ -21,6 +21,7 @@ view: next_events_list {
                     and base_table.event_type = 'PAGE_LOAD' and drf_play.location_url like '%https://play.drf.com/%'
                     and base_table.event_type is not Null and drf_play.event_type is not Null
                     AND (((CAST(drf_play.created_at_ms  AS BIGINT) / 1000) - (CAST(base_table.created_at_ms  AS BIGINT) / 1000)) / 60) BETWEEN 0 AND 5
+                    AND ((((CAST(base_table.created_at_ms  AS BIGINT) / 1000) >= (DATE_PART(epoch, TIMESTAMP '2018-11-01')::bigint) AND (CAST(base_table.created_at_ms  AS BIGINT) / 1000) < (DATE_PART(epoch, TIMESTAMP '2018-11-30')::bigint))))
                     GROUP BY 1,2,3,4,5,6,7,8,9
                     ORDER BY 1 DESC,2 ASC, 3 ASC
                     )
@@ -41,7 +42,8 @@ view: next_events_list {
                     )
 
                     select * from event_1
-                    where event_1.event_type = 'PAGE_LOAD' and event_1.event_type is not Null and event_1.location_url = 'https://play.drf.com/#/'
+                    where event_1.event_type = 'PAGE_LOAD' and event_1.location_url = 'https://play.drf.com/#/'
+
        ;;
   }
 

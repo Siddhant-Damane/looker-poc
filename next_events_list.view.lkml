@@ -41,8 +41,8 @@ view: next_events_list {
                     FROM event_table
                     )
 
-                    select * from event_1
-                    where event_1.event_type = 'PAGE_LOAD' and event_1.location_url = 'https://play.drf.com/#/'
+                    select event_1.user_id,event_1.event_type,event_1.location_url  from event_1
+                    --where event_1.event_type = 'PAGE_LOAD' and event_1.location_url = 'https://play.drf.com/#/'
 
        ;;
   }
@@ -52,9 +52,15 @@ view: next_events_list {
     drill_fields: [detail*]
   }
 
+
   dimension: user_id {
-    type: number
+    type: string
     sql: ${TABLE}.user_id ;;
+  }
+
+  dimension: location_url {
+    type: string
+    sql: ${TABLE}.location_url ;;
   }
 
   dimension: stage_stream_table_created_at_ms {
@@ -67,11 +73,15 @@ view: next_events_list {
     sql: ${TABLE}.stage_stream_table_created_at_ms_formatted_time ;;
   }
 
-#   dimension: event_type {
-#     label: "The Click"
-#     type: string
-#     sql: ${TABLE}.event_type ;;
-#   }
+  dimension: event_type {
+    label: "The Click"
+    type: string
+    sql: ${TABLE}.event_type ;;
+  }
+  measure: count_event_type {
+    type: count
+    sql: ${TABLE}.event_type ;;
+  }
 
   dimension: first_action_after_click {
     type: string

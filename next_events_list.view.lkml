@@ -74,7 +74,7 @@ view: next_events_list {
   }
 
   dimension: event_type {
-    label: "The Click"
+    label: "Event type"
     type: string
     sql: ${TABLE}.event_type ;;
   }

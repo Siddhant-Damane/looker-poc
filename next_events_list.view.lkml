@@ -18,7 +18,8 @@ view: next_events_list {
                             base_table.location_url  AS base_table_location_url
                           FROM public.prod_stream_table as base_table
                     INNER JOIN public.prod_stream_table AS drf_play ON base_table.drf_user_id = drf_play.drf_user_id
-                    and base_table.event_type = 'PAGE_LOAD' and drf_play.location_url like '%https://play.drf.com/%'
+                    and drf_play.location_url like '%https://play.drf.com/%'
+                    and base_table.location_url = 'https://play.drf.com/#/'
                     and base_table.event_type is not Null and drf_play.event_type is not Null
                     AND (((CAST(drf_play.created_at_ms  AS BIGINT) / 1000) - (CAST(base_table.created_at_ms  AS BIGINT) / 1000)) / 60) BETWEEN 0 AND 5
                     AND ((((CAST(base_table.created_at_ms  AS BIGINT) / 1000) >= (DATE_PART(epoch, TIMESTAMP '2018-11-01')::bigint) AND (CAST(base_table.created_at_ms  AS BIGINT) / 1000) < (DATE_PART(epoch, TIMESTAMP '2018-11-30')::bigint))))

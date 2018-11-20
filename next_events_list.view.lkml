@@ -22,7 +22,7 @@ view: next_events_list {
                     and base_table.location_url = 'https://play.drf.com/#/'
                     and base_table.event_type is not Null and drf_play.event_type is not Null
                     AND (((CAST(drf_play.created_at_ms  AS BIGINT) / 1000) - (CAST(base_table.created_at_ms  AS BIGINT) / 1000)) / 60) BETWEEN 0 AND 5
-                    AND ((((CAST(base_table.created_at_ms  AS BIGINT) / 1000) >= (DATE_PART(epoch, TIMESTAMP '2018-11-01')::bigint) AND (CAST(base_table.created_at_ms  AS BIGINT) / 1000) < (DATE_PART(epoch, TIMESTAMP '2018-11-30')::bigint))))
+                    AND ((((CAST(base_table.created_at_ms  AS BIGINT) / 1000) >= (DATE_PART(epoch, TIMESTAMP '2018-11-03')::bigint) AND (CAST(base_table.created_at_ms  AS BIGINT) / 1000) < (DATE_PART(epoch, TIMESTAMP '2018-11-04')::bigint))))
                     GROUP BY 1,2,3,4,5,6,7,8,9
                     ORDER BY 1 DESC,2 ASC, 3 ASC
                     )

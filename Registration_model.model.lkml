@@ -75,3 +75,4 @@ explore: user_count {
 # explore: bets_user_count {
 #   sql_always_where: ${DRF_Customer_ID} is not Null;;
 # }
+explore: next_events_list {}

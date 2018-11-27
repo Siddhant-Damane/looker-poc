@@ -53,6 +53,26 @@ view: registration_view {
     drill_fields: []
   }
 
+  measure: distict_drf_customer_Id {
+    description: "count of User_Tracking_ID"
+    type: count_distinct
+    sql: ${DRF_Customer_ID} ;;
+    drill_fields: []
+  }
+
+  measure: distict_user_tracking_Id {
+    description: "count of drf_customer_Id"
+    type: count_distinct
+    sql: ${User_Tracking_ID} ;;
+    drill_fields: []
+  }
+
+  measure: distinct_xpb_Id {
+    description: "count of xpb_Id"
+    type: count_distinct
+    sql: ${XPB_ID} ;;
+    drill_fields: []
+  }
   dimension: meta_data {
     description: "App specific event meta data"
     type: string

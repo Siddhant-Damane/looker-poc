@@ -18,6 +18,7 @@ include: "*.dashboard.lookml"  # include all dashboards in this project
 #   }
 # }
 explore: registration_view {}
+explore: blc_order_view {}
 explore: user_funnel_view {}
 #Paly Dashboard Views
 explore: play_user_count {
@@ -76,3 +77,5 @@ explore: user_count {
 #   sql_always_where: ${DRF_Customer_ID} is not Null;;
 # }
 explore: next_events_list {}
+
+explore: active_users_per_day_weekly_comparison {}

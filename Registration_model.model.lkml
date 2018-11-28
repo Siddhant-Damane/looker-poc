@@ -19,6 +19,9 @@ include: "*.dashboard.lookml"  # include all dashboards in this project
 # }
 explore: registration_view {}
 explore: blc_order_view {}
+explore: blc_order_item_view {}
+explore: wager_view {}
+explore: resolved_bet_view {}
 explore: user_funnel_view {}
 #Paly Dashboard Views
 explore: play_user_count {

@@ -81,4 +81,4 @@ explore: user_count {
 # }
 explore: next_events_list {}
 
-explore: active_users_per_day_weekly_comparison {}
+explore: active_users_weekly_comparison {}

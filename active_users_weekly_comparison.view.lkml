@@ -1,4 +1,4 @@
-view: active_users_per_day_weekly_comparison {
+view: active_users_weekly_comparison {
 
 
     derived_table: {
@@ -27,7 +27,7 @@ view: active_users_per_day_weekly_comparison {
 #     sql: ${TABLE}.location_url ;;
 #   }
 
-    dimension: date {
+    dimension: per_day {
       description: "When the event happened"
        type: date_day_of_week
 #         type: date

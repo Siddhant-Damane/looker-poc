@@ -83,3 +83,4 @@ explore: next_events_list {}
 
 explore: active_users_weekly_comparison {}
 explore: weekly_list_of_non_beta_users {}
+explore: count_events_per_week_comparison {}

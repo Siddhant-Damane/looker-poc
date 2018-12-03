@@ -26,7 +26,7 @@ view: count_events_per_day {
   dimension_group: created_at_ms_formatted {
     type: time
     datatype: epoch
-    timeframes: [time, raw, date, week, month, year, hour_of_day]
+    timeframes: [time, raw, date, week, month, year, hour_of_day,day_of_week]
     sql: CAST(${created_at_ms} AS BIGINT) / 1000;;
   }
 
@@ -39,8 +39,7 @@ view: count_events_per_day {
   measure: count_events {
     description: "count of user event"
     type: count
-    sql: ${event_type} ;;
-    drill_fields: []
+    sql: ${TABLE}.event_type ;;
   }
 
   dimension: DRF_Customer_ID {

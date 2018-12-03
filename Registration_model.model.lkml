@@ -22,7 +22,18 @@ explore: blc_order_view {}
 explore: blc_order_item_view {}
 explore: wager_view {}
 explore: resolved_bet_view {}
+explore: account_admin_deposits {}
+explore: account_deposits {}
+explore: account_status {}
+explore: account_wagers {}
+explore: blc_category {}
+explore: blc_category_product_xref {}
+explore: blc_discrete_order_item {}
+explore: blc_order_item_attribute {}
+explore: blc_product {}
+explore: blc_sku {}
 explore: user_funnel_view {}
+
 #Paly Dashboard Views
 explore: play_user_count {
 #   sql_always_where: ${DRF_Customer_ID} is not Null;;

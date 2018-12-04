@@ -3,6 +3,34 @@ view: registration_view {
   sql_table_name: public.prod_stream_table ;;
   #
   # # Define your dimensions and measures here, like this:
+
+  dimension: ip_address {
+    description: "ip address"
+    type: string
+    sql: ${TABLE}.ip_address ;;
+  }
+
+  dimension: application {
+    description: "application Name"
+    type: string
+    sql: ${TABLE}.application ;;
+  }
+  dimension: logged_in_status {
+    description: "Logged In status"
+    type: string
+    sql: ${TABLE}.logged_in_status ;;
+  }
+  dimension: operating_system {
+    description: "operating system"
+    type: string
+    sql: ${TABLE}.operating_system ;;
+  }
+
+  dimension: browser {
+    description: "browser"
+    type: string
+    sql: ${TABLE}.browser ;;
+  }
   dimension: event_type {
      description: "type of user event"
      type: string

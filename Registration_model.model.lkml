@@ -32,6 +32,7 @@ explore: blc_discrete_order_item {}
 explore: blc_order_item_attribute {}
 explore: blc_product {}
 explore: blc_sku {}
+explore: drf_customer {}
 explore: user_funnel_view {}
 
 #Paly Dashboard Views

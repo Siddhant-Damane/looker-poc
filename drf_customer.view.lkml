@@ -6,9 +6,9 @@ view: drf_customer {
     sql: ${TABLE}.created_by ;;
   }
 
-  dimension: broadLeaf_customer_id {
-    label: "broadLeaf customer id"
-    type: number
+  dimension: broadleaf_customer_id {
+    label: "Broadleaf Customer ID"
+    type: string
     sql: ${TABLE}.customer_id ;;
   }
 

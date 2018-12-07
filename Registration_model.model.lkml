@@ -17,7 +17,25 @@ include: "*.dashboard.lookml"  # include all dashboards in this project
 #     sql_on: ${users.id} = ${orders.user_id} ;;
 #   }
 # }
-explore: registration_view {}
+explore: registration_view {
+  join: drf_customer {
+    relationship: one_to_one
+    sql_on: ${registration_view.DRF_Customer_ID} = ${drf_customer.DRF_Customer_ID} ;;
+  }
+  join: blc_customer {
+    relationship: one_to_one
+    sql_on: ${drf_customer.broadleaf_customer_id} = ${blc_customer.customer_id} ;;
+  }
+}
+
+explore: drf_customer {
+  join: blc_customer {
+    relationship: one_to_one
+    sql_on: ${drf_customer.broadleaf_customer_id} = ${blc_customer.customer_id} ;;
+  }
+}
+
+explore: blc_customer {}
 explore: blc_order_view {}
 explore: blc_order_item_view {}
 explore: wager_view {}
@@ -32,7 +50,7 @@ explore: blc_discrete_order_item {}
 explore: blc_order_item_attribute {}
 explore: blc_product {}
 explore: blc_sku {}
-explore: drf_customer {}
+
 explore: user_funnel_view {}
 
 #Paly Dashboard Views

@@ -112,12 +112,14 @@ view: account_owner_xb_drf_wrong_acc {
 
   dimension: handle {
     type: number
-    sql: cast(${TABLE}.handle as decimal);;
+    sql: CAST(${TABLE}.handle AS FLOAT) ;;
+    value_format: "000.00000000"
   }
 
-  measure: sum_hnadle {
+  measure: sum_handle {
     type:  sum
     sql: ${handle} ;;
+    value_format: "000.00000000"
   }
 
 

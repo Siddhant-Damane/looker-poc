@@ -90,13 +90,14 @@ view: account_owner_xb_drf {
 
   dimension: handle {
     type: number
-    sql: cast(${TABLE}.handle as decimal);;
+    sql: CAST(${TABLE}.handle AS FLOAT) ;;
   }
 
 
-  measure: sum_hnadle {
+  measure: sum_handle {
     type:  sum
     sql: ${handle} ;;
+    value_format: "000.00000000"
   }
 
 

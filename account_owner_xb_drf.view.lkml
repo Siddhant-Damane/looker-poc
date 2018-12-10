@@ -24,9 +24,15 @@ view: account_owner_xb_drf {
 
   dimension: chg_date {
     type: string
-    sql: ${TABLE}.chg_date ;;
+    sql: ${TABLE}.chg_date;;
   }
 
+#
+#   dimension_group: chg_date{
+#     type: time
+#     datatype: yyyymmdd
+#     sql: ${TABLE}.chg_date;;
+#   }
   dimension: correct_owner {
     type: string
     sql: ${TABLE}.correct_owner ;;
@@ -37,12 +43,26 @@ view: account_owner_xb_drf {
     sql: ${TABLE}.derby ;;
   }
 
+
+
+#   dimension: eventdate {
+#     type: date
+#     sql: to_date(${TABLE}.eventdate, 'yyyy-mm-dd') ;;
+#   }
+#
+#   dimension_group: eventdate{
+#     type: time
+#     datatype: yyyymmdd
+#     sql: ${eventdate};;
+#   }
+
   dimension: eventdate {
     type: string
     sql: ${TABLE}.eventdate ;;
   }
 
-  dimension: handle {
+
+  measure: handle {
     type: string
     sql: ${TABLE}.handle ;;
   }
@@ -68,11 +88,11 @@ view: account_owner_xb_drf {
   }
 
   dimension: switch_days {
-    type: string
+    type: number
     sql: ${TABLE}.switch_days ;;
   }
 
-  dimension: takeout {
+  measure: takeout {
     type: string
     sql: ${TABLE}.takeout ;;
   }

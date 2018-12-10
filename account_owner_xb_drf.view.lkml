@@ -22,18 +22,21 @@ view: account_owner_xb_drf {
     sql: ${TABLE}.acctowner ;;
   }
 
-  dimension: chg_date {
-    type: date
-    sql: case
-        when ${TABLE}.chg_date = 'Chg_Date' then to_date(${TABLE}.chg_date, '1800-01-01')
-        else to_date(${TABLE}.chg_date, 'yyyy-mm-dd')
-        end ;;
-  }
+#   dimension: chg_date {
+#     type: date
+#     sql: case
+#         when ${TABLE}.chg_date = 'Chg_Date' then to_date(${TABLE}.chg_date, '1800-01-01')
+#         else to_date(${TABLE}.chg_date, 'yyyy-mm-dd')
+#         end ;;
+#   }
   dimension_group: chg_date_formatted {
     type: time
     convert_tz: no
     timeframes: [date, week, month, year]
-    sql: ${chg_date};;
+    sql: case
+        when ${TABLE}.chg_date = 'Chg_Date' then to_date(${TABLE}.chg_date, '1800-01-01')
+        else to_date(${TABLE}.chg_date, 'yyyy-mm-dd')
+        end ;;
   }
 
 #
@@ -65,19 +68,23 @@ view: account_owner_xb_drf {
 #     sql: ${eventdate};;
 #   }
 
-  dimension: eventdate {
-    type: date
-    sql: case
-        when ${TABLE}.eventdate = 'EventDate' then to_date(${TABLE}.eventdate, '1800-01-01')
-        else to_date(${TABLE}.eventdate, 'yyyy-mm-dd')
-        end;;
-  }
+#   dimension: eventdate {
+#     type: date
+#     convert_tz: no
+#     sql: case
+#         when ${TABLE}.eventdate = 'EventDate' then to_date(${TABLE}.eventdate, '1800-01-01')
+#         else to_date(${TABLE}.eventdate, 'yyyy-mm-dd')
+#         end;;
+#   }
 
   dimension_group: eventdate_formatted {
     type: time
     convert_tz: no
     timeframes: [date, week, month, year]
-    sql: ${eventdate};;
+    sql: case
+        when ${TABLE}.eventdate = 'EventDate' then to_date(${TABLE}.eventdate, '1800-01-01')
+        else to_date(${TABLE}.eventdate, 'yyyy-mm-dd')
+        end;;
   }
 
 
@@ -95,12 +102,14 @@ view: account_owner_xb_drf {
 
   dimension: takeout {
     type: number
-    sql:cast(${TABLE}.takeout as decimal);;
+    sql: CAST(${TABLE}.takeout AS FLOAT) ;;
+    value_format: "000.00000000"
   }
 
   measure: sum_takeout {
     type:  sum
     sql: ${takeout} ;;
+    value_format: "000.00000000"
   }
 
   dimension: intf {

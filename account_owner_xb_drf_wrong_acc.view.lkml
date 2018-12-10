@@ -28,19 +28,22 @@ view: account_owner_xb_drf_wrong_acc {
 #   }
 
 
-  dimension: chg_date {
-    type: date
-    sql: case
-        when ${TABLE}.chg_date = 'Chg_Date' then to_date(${TABLE}.chg_date, '1800-01-01')
-        else to_date(${TABLE}.chg_date, 'yyyy-mm-dd')
-        end ;;
-  }
+#   dimension: chg_date {
+#     type: date
+#     sql: case
+#         when ${TABLE}.chg_date = 'Chg_Date' then '1800-01-01'
+#         else ${TABLE}.chg_date
+#         end ;;
+#   }
 
   dimension_group: chg_date_formatted {
     type: time
     convert_tz: no
     timeframes: [date, week, month, year]
-    sql: ${chg_date};;
+    sql:case
+        when ${TABLE}.chg_date = 'Chg_Date' then '1800-01-01'
+        else ${TABLE}.chg_date
+        end ;;
   }
 
   dimension: correct_owner {
@@ -53,19 +56,23 @@ view: account_owner_xb_drf_wrong_acc {
     sql: ${TABLE}.derby ;;
   }
 
- dimension: eventdate {
-  type: date
-  convert_tz: no
-  sql: case
-        when ${TABLE}.eventdate = 'EventDate' then to_date(${TABLE}.eventdate, '1800-01-01')
-        else to_date(${TABLE}.eventdate, 'yyyy-mm-dd')
-        end;;
-}
+#  dimension: eventdate {
+#   type: date
+#   convert_tz: no
+#   sql: case
+#         when ${TABLE}.eventdate = 'EventDate' then '1800-01-01'
+#         else ${TABLE}.eventdate
+#         end;;
+# }
 
   dimension_group: eventdate_formatted {
     type: time
     timeframes: [date, week, month, year]
-    sql: ${eventdate};;
+    convert_tz: no
+    sql:  case
+        when ${TABLE}.eventdate = 'EventDate' then '1800-01-01'
+        else ${TABLE}.eventdate
+        end;;
   }
 #
 #   measure: handle {
@@ -116,13 +123,16 @@ view: account_owner_xb_drf_wrong_acc {
 
   dimension: takeout {
     type: number
-    sql:cast(${TABLE}.takeout as decimal);;
+    sql: CAST(${TABLE}.takeout AS FLOAT) ;;
+    value_format: "000.00000000"
   }
 
   measure: sum_takeout {
     type:  sum
     sql: ${takeout} ;;
+    value_format: "000.00000000"
   }
+
   measure: count {
     type: count
     drill_fields: [id]

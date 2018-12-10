@@ -35,6 +35,13 @@ view: account_owner_xb_drf_wrong_acc {
         else to_date(${TABLE}.chg_date, 'yyyy-mm-dd')
         end ;;
   }
+
+  dimension_group: chg_date_formatted {
+    type: time
+    timeframes: [date, week, month, year]
+    sql: ${chg_date};;
+  }
+
   dimension: correct_owner {
     type: string
     sql: ${TABLE}.correct_owner ;;
@@ -52,6 +59,12 @@ view: account_owner_xb_drf_wrong_acc {
         else to_date(${TABLE}.eventdate, 'yyyy-mm-dd')
         end;;
 }
+
+  dimension_group: eventdate_formatted {
+    type: time
+    timeframes: [date, week, month, year]
+    sql: ${eventdate};;
+  }
 #
 #   measure: handle {
 #     type: string

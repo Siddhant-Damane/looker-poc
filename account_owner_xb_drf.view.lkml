@@ -29,6 +29,11 @@ view: account_owner_xb_drf {
         else to_date(${TABLE}.chg_date, 'yyyy-mm-dd')
         end ;;
   }
+  dimension_group: chg_date_formatted {
+    type: time
+    timeframes: [date, week, month, year]
+    sql: ${chg_date};;
+  }
 
 #
 #   dimension_group: chg_date{
@@ -67,11 +72,18 @@ view: account_owner_xb_drf {
         end;;
   }
 
+  dimension_group: eventdate_formatted {
+    type: time
+    timeframes: [date, week, month, year]
+    sql: ${eventdate};;
+  }
+
 
   dimension: handle {
     type: number
     sql: cast(${TABLE}.handle as decimal);;
   }
+
 
   measure: sum_hnadle {
     type:  sum

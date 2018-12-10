@@ -38,6 +38,7 @@ view: account_owner_xb_drf_wrong_acc {
 
   dimension_group: chg_date_formatted {
     type: time
+    convert_tz: no
     timeframes: [date, week, month, year]
     sql: ${chg_date};;
   }
@@ -54,6 +55,7 @@ view: account_owner_xb_drf_wrong_acc {
 
  dimension: eventdate {
   type: date
+  convert_tz: no
   sql: case
         when ${TABLE}.eventdate = 'EventDate' then to_date(${TABLE}.eventdate, '1800-01-01')
         else to_date(${TABLE}.eventdate, 'yyyy-mm-dd')

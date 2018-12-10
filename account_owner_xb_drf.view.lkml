@@ -31,6 +31,7 @@ view: account_owner_xb_drf {
   }
   dimension_group: chg_date_formatted {
     type: time
+    convert_tz: no
     timeframes: [date, week, month, year]
     sql: ${chg_date};;
   }
@@ -74,6 +75,7 @@ view: account_owner_xb_drf {
 
   dimension_group: eventdate_formatted {
     type: time
+    convert_tz: no
     timeframes: [date, week, month, year]
     sql: ${eventdate};;
   }

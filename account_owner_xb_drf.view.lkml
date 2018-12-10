@@ -68,9 +68,25 @@ view: account_owner_xb_drf {
   }
 
 
-  measure: handle {
-    type: string
-    sql: ${TABLE}.handle ;;
+  dimension: handle {
+    type: number
+    sql: cast(${TABLE}.handle as decimal);;
+  }
+
+  measure: sum_hnadle {
+    type:  sum
+    sql: ${handle} ;;
+  }
+
+
+  dimension: takeout {
+    type: number
+    sql:cast(${TABLE}.handle as decimal);;
+  }
+
+  measure: sum_takeout {
+    type:  sum
+    sql: ${takeout} ;;
   }
 
   dimension: intf {
@@ -98,10 +114,7 @@ view: account_owner_xb_drf {
     sql: ${TABLE}.switch_days ;;
   }
 
-  measure: takeout {
-    type: string
-    sql: ${TABLE}.takeout ;;
-  }
+
 
   measure: count {
     type: count

@@ -81,7 +81,7 @@ view: account_owner_xb_drf {
 
   dimension: takeout {
     type: number
-    sql:cast(${TABLE}.handle as decimal);;
+    sql:cast(${TABLE}.takeout as decimal);;
   }
 
   measure: sum_takeout {

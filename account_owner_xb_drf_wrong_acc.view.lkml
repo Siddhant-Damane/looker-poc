@@ -52,11 +52,11 @@ view: account_owner_xb_drf_wrong_acc {
         else to_date(${TABLE}.eventdate, 'yyyy-mm-dd')
         end;;
 }
-
-  measure: handle {
-    type: string
-    sql: ${TABLE}.handle ;;
-  }
+#
+#   measure: handle {
+#     type: string
+#     sql: ${TABLE}.handle ;;
+#   }
 
   dimension: intf {
     type: string
@@ -83,11 +83,31 @@ view: account_owner_xb_drf_wrong_acc {
     sql: ${TABLE}.switch_days ;;
   }
 
-  measure: takeout {
-    type: string
-    sql: ${TABLE}.takeout ;;
+#   measure: takeout {
+#     type: string
+#     sql: ${TABLE}.takeout ;;
+#   }
+
+  dimension: handle {
+    type: number
+    sql: cast(${TABLE}.handle as decimal);;
   }
 
+  measure: sum_hnadle {
+    type:  sum
+    sql: ${handle} ;;
+  }
+
+
+  dimension: takeout {
+    type: number
+    sql:cast(${TABLE}.takeout as decimal);;
+  }
+
+  measure: sum_takeout {
+    type:  sum
+    sql: ${takeout} ;;
+  }
   measure: count {
     type: count
     drill_fields: [id]

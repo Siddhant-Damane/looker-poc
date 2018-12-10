@@ -14,7 +14,7 @@ view: account_owner_xb_drf {
 
   dimension: acct_chg {
     type: string
-    sql: ${TABLE}.acct_chg ;;
+    sql: ${TABLE}.acct_chg;;
   }
 
   dimension: acctowner {
@@ -23,8 +23,11 @@ view: account_owner_xb_drf {
   }
 
   dimension: chg_date {
-    type: string
-    sql: ${TABLE}.chg_date;;
+    type: date
+    sql: case
+        when ${TABLE}.chg_date = 'Chg_Date' then to_date(${TABLE}.chg_date, '1800-01-01')
+        else to_date(${TABLE}.chg_date, 'yyyy-mm-dd')
+        end ;;
   }
 
 #
@@ -57,8 +60,11 @@ view: account_owner_xb_drf {
 #   }
 
   dimension: eventdate {
-    type: string
-    sql: ${TABLE}.eventdate ;;
+    type: date
+    sql: case
+        when ${TABLE}.eventdate = 'EventDate' then to_date(${TABLE}.eventdate, '1800-01-01')
+        else to_date(${TABLE}.eventdate, 'yyyy-mm-dd')
+        end;;
   }
 
 

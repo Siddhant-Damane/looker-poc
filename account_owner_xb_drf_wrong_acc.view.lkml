@@ -22,11 +22,19 @@ view: account_owner_xb_drf_wrong_acc {
     sql: ${TABLE}.acctowner ;;
   }
 
-  dimension: chg_date {
-    type: string
-    sql: ${TABLE}.chg_date ;;
-  }
+#   dimension: chg_date {
+#     type: string
+#     sql: ${TABLE}.chg_date ;;
+#   }
 
+
+  dimension: chg_date {
+    type: date
+    sql: case
+        when ${TABLE}.chg_date = 'Chg_Date' then to_date(${TABLE}.chg_date, '1800-01-01')
+        else to_date(${TABLE}.chg_date, 'yyyy-mm-dd')
+        end ;;
+  }
   dimension: correct_owner {
     type: string
     sql: ${TABLE}.correct_owner ;;
@@ -37,12 +45,15 @@ view: account_owner_xb_drf_wrong_acc {
     sql: ${TABLE}.derby ;;
   }
 
-  dimension: eventdate {
-    type: string
-    sql: ${TABLE}.eventdate ;;
-  }
+ dimension: eventdate {
+  type: date
+  sql: case
+        when ${TABLE}.eventdate = 'EventDate' then to_date(${TABLE}.eventdate, '1800-01-01')
+        else to_date(${TABLE}.eventdate, 'yyyy-mm-dd')
+        end;;
+}
 
-  dimension: handle {
+  measure: handle {
     type: string
     sql: ${TABLE}.handle ;;
   }
@@ -68,11 +79,11 @@ view: account_owner_xb_drf_wrong_acc {
   }
 
   dimension: switch_days {
-    type: string
+    type:  number
     sql: ${TABLE}.switch_days ;;
   }
 
-  dimension: takeout {
+  measure: takeout {
     type: string
     sql: ${TABLE}.takeout ;;
   }

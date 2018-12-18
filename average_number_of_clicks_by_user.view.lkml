@@ -56,6 +56,7 @@ view: average_number_of_clicks_by_user {
     sql:  ${TABLE}.drf_user_id ;;
   }
   dimension: event_type {
+    order_by_field: average_number_of_clicks
     description: "DRF Customer ID"
     type: string
     sql:  ${TABLE}.event_type ;;
@@ -69,6 +70,7 @@ view: average_number_of_clicks_by_user {
   }
 
   measure: count_event_type {
+
     description: "count of user event"
     type: count
     sql: ${event_type} ;;
@@ -76,6 +78,7 @@ view: average_number_of_clicks_by_user {
   }
 
   measure: average_number_of_clicks {
+    type: number
     description: "average number of clicks"
     sql: cast(( (1.0 * ${count_event_type}) /(${distinct_DRF_Customer_ID})) as decimal(8,2));;
   }

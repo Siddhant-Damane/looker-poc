@@ -8,7 +8,7 @@ view: sports_visitors_each_week {
 
                 max(CASE WHEN ((((CAST(created_at_ms AS BIGINT) / 1000) >= ((DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', DATEADD(week,-1, DATE_TRUNC('week', DATE_TRUNC('day',CONVERT_TIMEZONE('UTC', 'America/New_York', GETDATE()))) )))::bigint)) AND
       (CAST(created_at_ms AS BIGINT) / 1000) < ((DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', DATEADD(week,1, DATEADD(week,-1, DATE_TRUNC('week', DATE_TRUNC('day',CONVERT_TIMEZONE('UTC', 'America/New_York', GETDATE()))) ) )))::bigint)))))THEN 1 ELSE 0 END)  as priorFirstWeek
-                  from public.prod_stream_table as ss where ss.location_url like 'https://sports.drf.com%' and ss.drf_user_id is Null group by 1;;
+                  from public.prod_stream_table as ss where ss.location_url like 'https://sports.drf.com%' and ss.user_tracking_id is not Null and ss.drf_user_id is Null group by 1;;
     }
 
     dimension: user_tracking_id {

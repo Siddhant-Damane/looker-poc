@@ -31,7 +31,6 @@ explore: registration_view {
 }
 
 
-explore: sports_count_events_per_week_comparison {}
 explore: drf_customer {
   join: blc_customer {
     relationship: one_to_one
@@ -119,3 +118,5 @@ explore: active_users_weekly_comparison {}
 explore: weekly_list_of_non_beta_users {}
 explore: count_events_per_week_comparison {}
 explore: sports_player_user_each_week {}
+explore: sports_visitors_each_week {}
+explore: sports_count_events_per_week_comparison {}

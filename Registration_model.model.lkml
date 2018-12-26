@@ -30,6 +30,8 @@ explore: registration_view {
   }
 }
 
+
+explore: sports_count_events_per_week_comparison {}
 explore: drf_customer {
   join: blc_customer {
     relationship: one_to_one

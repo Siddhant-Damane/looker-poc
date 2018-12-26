@@ -18,10 +18,12 @@ include: "*.dashboard.lookml"  # include all dashboards in this project
 #   }
 # }
 explore: registration_view {
+  # Public_prod_stream table to drf_customer one to one relationship
   join: drf_customer {
     relationship: one_to_one
     sql_on: ${registration_view.DRF_Customer_ID} = ${drf_customer.DRF_Customer_ID} ;;
   }
+  # blc_customer table to drf_customer one to one relationship
   join: blc_customer {
     relationship: one_to_one
     sql_on: ${drf_customer.broadleaf_customer_id} = ${blc_customer.customer_id} ;;
@@ -114,3 +116,4 @@ explore: next_events_list {}
 explore: active_users_weekly_comparison {}
 explore: weekly_list_of_non_beta_users {}
 explore: count_events_per_week_comparison {}
+explore: sports_player_user_each_week {}

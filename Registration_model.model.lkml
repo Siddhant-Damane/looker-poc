@@ -120,3 +120,5 @@ explore: count_events_per_week_comparison {}
 explore: sports_player_user_each_week {}
 explore: sports_visitors_each_week {}
 explore: sports_count_events_per_week_comparison {}
+explore: home_visitors_each_week {}
+explore: home_players_each_week {}

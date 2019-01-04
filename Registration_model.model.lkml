@@ -113,7 +113,9 @@ explore: user_count {
 #   sql_always_where: ${DRF_Customer_ID} is not Null;;
 # }
 explore: next_events_list {}
-
+explore: count_of_tracks_for_drf_com {
+  sql_always_where: ${drf_user_id} is not Null;;
+}
 explore: active_users_weekly_comparison {}
 explore: weekly_list_of_non_beta_users {}
 explore: count_events_per_week_comparison {}

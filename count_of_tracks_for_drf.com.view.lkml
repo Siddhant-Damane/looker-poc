@@ -130,7 +130,7 @@ view: count_of_tracks_for_drf_com {
     sql:
      (SELECT count_of_tracks_per_user.drf_user_id, trim(regexp_substr(trim(count_of_tracks_per_user.location_url, regexp_substr(count_of_tracks_per_user.location_url,'https://www.drf.com/pp-details/[0-9]*-[0-9]*-[0-9]*')),'[A-Z]*')) AS "track_id",
       DATE(CONVERT_TIMEZONE('UTC', 'America/New_York', (timestamp 'epoch' + CAST(count_of_tracks_per_user.created_at_ms AS BIGINT) / 1000 * interval '1 second')))
-      FROM public.prod_stream_table  AS count_of_tracks_per_user WHERE
+      FROM public.prod_stream_table  AS count_of_tracks_per_user WHERE count_of_tracks_per_user.event_type = 'PAGE_LOAD' and count_of_tracks_per_user.location_url like 'https://www.drf.com/pp-details/%' and
       (count_of_tracks_per_user.drf_user_id IS NOT NULL))
 
       ;;

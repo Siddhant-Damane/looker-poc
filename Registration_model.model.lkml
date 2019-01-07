@@ -115,6 +115,7 @@ explore: user_count {
 explore: drf_bets_visitors_weekly_comparison {}
 explore: drf_bets_player_weekly_comparison {}
 explore: weekly_comparison_global_with_location_filter {}
+explore: active_bets_users_weekly_comparison {}
 explore: next_events_list {}
 explore: count_of_tracks_for_drf_com {
   sql_always_where: ${drf_user_id} is not Null;;

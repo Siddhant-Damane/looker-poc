@@ -112,6 +112,8 @@ explore: user_count {
 # explore: bets_user_count {
 #   sql_always_where: ${DRF_Customer_ID} is not Null;;
 # }
+explore: drf_bets_visitors_weekly_comparison {}
+explore: drf_bets_player_weekly_comparison {}
 explore: next_events_list {}
 explore: count_of_tracks_for_drf_com {
   sql_always_where: ${drf_user_id} is not Null;;

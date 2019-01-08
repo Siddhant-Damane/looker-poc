@@ -62,6 +62,19 @@ view: count_of_play_user_by_device {
       drill_fields: []
     }
 
+  dimension: DRF_xpb_id {
+    description: "DRF Customer ID"
+    type: string
+    sql:  ${TABLE}.xpb_user_id ;;
+  }
+
+  measure: distinct_DRF_xpb_id {
+    description: "count of user event"
+    type: count_distinct
+    sql: ${DRF_xpb_id} ;;
+    drill_fields: []
+  }
+
 
 }
 

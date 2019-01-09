@@ -131,3 +131,4 @@ explore: sports_visitors_each_week {}
 explore: sports_count_events_per_week_comparison {}
 explore: home_visitors_each_week {}
 explore: home_players_each_week {}
+explore: weekly_list_of_pp_users {}

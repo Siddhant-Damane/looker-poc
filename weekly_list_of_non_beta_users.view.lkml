@@ -27,7 +27,7 @@ view: weekly_list_of_non_beta_users {
                 --AND ((((CAST(present_play_user_not_in_beta.created_at_ms AS BIGINT) / 1000) >= (DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', TIMESTAMP '2018-08-30'))::bigint)
                 --AND (CAST(present_play_user_not_in_beta.created_at_ms AS BIGINT) / 1000) < (DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', TIMESTAMP '2018-09-28'))::bigint))))
                 --group by 1))
-                FROM public.prod_stream_table as ss group by 1,2
+                FROM public.prod_stream_table as ss where ss.drf_user_id IS NOT NULL group by 1,2
 
 
 

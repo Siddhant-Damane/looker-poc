@@ -1,34 +1,33 @@
 view: weekly_list_of_non_beta_users {
 
   derived_table: {
-    sql: -- select count(s2.drf_user_id),s2.min from
-              --(select  (s1.drf_user_id), MIN(DATE(CONVERT_TIMEZONE('UTC', 'America/New_York', (timestamp 'epoch' + CAST(s1.created_at_ms AS BIGINT) / 1000 * interval '1 second'))))
-              --from public.prod_stream_table as s1
-              --where (s1.drf_user_id) IN(
+    sql:
+           select ss.drf_user_id,
+              DATE(CONVERT_TIMEZONE('UTC', 'America/New_York', (timestamp 'epoch' + CAST(ss.created_at_ms AS BIGINT) / 1000 * interval '1 second'))) AS "date",
+              max(CASE WHEN ((((CAST(ss.created_at_ms AS BIGINT) / 1000) >= ((DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', DATEADD(week,-2, DATE_TRUNC('week', DATE_TRUNC('day',CONVERT_TIMEZONE('UTC', 'America/New_York', GETDATE()))) )))::bigint))
+                          AND (CAST(ss.created_at_ms AS BIGINT) / 1000) < ((DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', DATEADD(week,1, DATEADD(week,-2, DATE_TRUNC('week', DATE_TRUNC('day',CONVERT_TIMEZONE('UTC', 'America/New_York', GETDATE()))) ) )))::bigint)))))THEN 1 ELSE 0 END) as priorSecondWeek,
 
-              select ss.drf_user_id,
-              DATE(CONVERT_TIMEZONE('UTC', 'America/New_York', (timestamp 'epoch' + CAST(ss.min_non_beta_user_date AS BIGINT) / 1000 * interval '1 second'))) AS "date",
-              max(CASE WHEN ((((CAST(ss.min_non_beta_user_date AS BIGINT) / 1000) >= ((DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', DATEADD(week,-2, DATE_TRUNC('week', DATE_TRUNC('day',CONVERT_TIMEZONE('UTC', 'America/New_York', GETDATE()))) )))::bigint))
-                          AND (CAST(ss.min_non_beta_user_date AS BIGINT) / 1000) < ((DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', DATEADD(week,1, DATEADD(week,-2, DATE_TRUNC('week', DATE_TRUNC('day',CONVERT_TIMEZONE('UTC', 'America/New_York', GETDATE()))) ) )))::bigint)))))THEN 1 ELSE 0 END) as priorSecondWeek,
+              max(CASE WHEN ((((CAST(ss.created_at_ms AS BIGINT) / 1000) >= ((DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', DATEADD(week,-1, DATE_TRUNC('week', DATE_TRUNC('day',CONVERT_TIMEZONE('UTC', 'America/New_York', GETDATE()))) )))::bigint)) AND
+     (CAST(ss.created_at_ms AS BIGINT) / 1000) < ((DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', DATEADD(week,1, DATEADD(week,-1, DATE_TRUNC('week', DATE_TRUNC('day',CONVERT_TIMEZONE('UTC', 'America/New_York', GETDATE()))) ) )))::bigint)))))THEN 1 ELSE 0 END) as priorFirstWeek
 
-                max(CASE WHEN ((((CAST(ss.min_non_beta_user_date AS BIGINT) / 1000) >= ((DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', DATEADD(week,-1, DATE_TRUNC('week', DATE_TRUNC('day',CONVERT_TIMEZONE('UTC', 'America/New_York', GETDATE()))) )))::bigint)) AND
-     (CAST(ss.min_non_beta_user_date AS BIGINT) / 1000) < ((DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', DATEADD(week,1, DATEADD(week,-1, DATE_TRUNC('week', DATE_TRUNC('day',CONVERT_TIMEZONE('UTC', 'America/New_York', GETDATE()))) ) )))::bigint)))))THEN 1 ELSE 0 END) as priorFirstWeek
-              from ((select public.prod_stream_table.drf_user_id,
-              MIN(public.prod_stream_table.created_at_ms) as "min_non_beta_user_date"
-                FROM public.prod_stream_table where public.prod_stream_table.location_url LIKE '%https://play.drf.com/%' AND public.prod_stream_table.drf_user_id IS NOT NULL AND
-                 ((((CAST(public.prod_stream_table.created_at_ms AS BIGINT) / 1000) >= (DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', TIMESTAMP '2018-09-28'))::bigint)
-                AND (CAST(public.prod_stream_table.created_at_ms AS BIGINT) / 1000) < (DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', TIMESTAMP '2018-12-31'))::bigint))))
-                group by 1)
 
-              minus
+--              from ((select public.prod_stream_table.drf_user_id,
+  --            MIN(public.prod_stream_table.) as "min_non_beta_user_date"
+    --            FROM public.prod_stream_table where  public.prod_stream_table.drf_user_id IS NOT NULL AND
+      --           ((((CAST(public.prod_stream_table.created_at_ms AS BIGINT) / 1000) >= (DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', TIMESTAMP '2018-09-28'))::bigint)
+        --        AND (CAST(public.prod_stream_table.created_at_ms AS BIGINT) / 1000) < (DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', TIMESTAMP '2019-12-31'))::bigint))))
+          --      group by 1)
 
-              (select present_play_user_not_in_beta.drf_user_id  AS "present_play_user_not_in_beta.drf_customer_id_1",
-                MIN(present_play_user_not_in_beta.created_at_ms)
-                FROM public.prod_stream_table  AS present_play_user_not_in_beta
-                WHERE (present_play_user_not_in_beta.location_url LIKE '%https://play.drf.com/%') AND ((present_play_user_not_in_beta.drf_user_id IS NOT NULL))
-                AND ((((CAST(present_play_user_not_in_beta.created_at_ms AS BIGINT) / 1000) >= (DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', TIMESTAMP '2018-08-30'))::bigint)
-                AND (CAST(present_play_user_not_in_beta.created_at_ms AS BIGINT) / 1000) < (DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', TIMESTAMP '2018-09-28'))::bigint))))
-                group by 1)) as ss group by 1,2
+            --  minus
+
+              --(select present_play_user_not_in_beta.drf_user_id  AS "present_play_user_not_in_beta.drf_customer_id_1",
+                --MIN(present_play_user_not_in_beta.created_at_ms)
+                --FROM public.prod_stream_table  AS present_play_user_not_in_beta
+                --WHERE ((present_play_user_not_in_beta.drf_user_id IS NOT NULL))
+                --AND ((((CAST(present_play_user_not_in_beta.created_at_ms AS BIGINT) / 1000) >= (DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', TIMESTAMP '2018-08-30'))::bigint)
+                --AND (CAST(present_play_user_not_in_beta.created_at_ms AS BIGINT) / 1000) < (DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', TIMESTAMP '2018-09-28'))::bigint))))
+                --group by 1))
+                FROM public.prod_stream_table as ss group by 1,2
 
 
 

@@ -23,6 +23,16 @@ view: play_user_count {
     sql: ${TABLE}.created_at_ms ;;
   }
 
+  dimension: event_type {
+    type: string
+    sql: ${TABLE}.event_type ;;
+  }
+
+  measure: total_event_count{
+    type: count_distinct
+    sql: ${event_type} ;;
+  }
+
   dimension_group: created_at_ms_formatted {
     type: time
     datatype: epoch

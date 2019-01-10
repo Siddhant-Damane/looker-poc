@@ -120,6 +120,7 @@ explore: site_wide_visitors_weekly_comparison {}
 explore: site_wide_players_weekly_comparison {}
 explore: active_pp_details_weekly_comparison {}
 explore: next_events_list {}
+explore: weekly_site_wide_users {}
 explore: count_of_tracks_for_drf_com {
   sql_always_where: ${drf_user_id} is not Null;;
 }

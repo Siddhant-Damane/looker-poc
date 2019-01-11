@@ -29,7 +29,7 @@ view: play_user_count {
   }
 
   measure: total_event_count{
-    type: count_distinct
+    type: count
     sql: ${event_type} ;;
   }
 

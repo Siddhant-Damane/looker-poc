@@ -1,8 +1,8 @@
-view: weekly_site_wide_users {
+view: weekly_bets_users {
 
     derived_table: {
       sql:
-           select ss.drf_user_id,
+           select ss.xpb_user_id,
               min(DATE(CONVERT_TIMEZONE('UTC', 'America/New_York', (timestamp 'epoch' + CAST(ss.created_at_ms AS BIGINT) / 1000 * interval '1 second')))) AS "date",
               max(CASE WHEN ((((CAST(ss.created_at_ms AS BIGINT) / 1000) >= ((DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', DATEADD(week,-2, DATE_TRUNC('week', DATE_TRUNC('day',CONVERT_TIMEZONE('UTC', 'America/New_York', GETDATE()))) )))::bigint))
                           AND (CAST(ss.created_at_ms AS BIGINT) / 1000) < ((DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', DATEADD(week,1, DATEADD(week,-2, DATE_TRUNC('week', DATE_TRUNC('day',CONVERT_TIMEZONE('UTC', 'America/New_York', GETDATE()))) ) )))::bigint)))))THEN 1 ELSE 0 END) as priorSecondWeek,
@@ -27,7 +27,9 @@ view: weekly_site_wide_users {
                 --AND ((((CAST(present_play_user_not_in_beta.created_at_ms AS BIGINT) / 1000) >= (DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', TIMESTAMP '2018-08-30'))::bigint)
                 --AND (CAST(present_play_user_not_in_beta.created_at_ms AS BIGINT) / 1000) < (DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', TIMESTAMP '2018-09-28'))::bigint))))
                 --group by 1))
-                FROM public.prod_stream_table as ss where ss.drf_user_id IS NOT NULL and ss.user_tracking_id is not Null group by 1
+                FROM public.prod_stream_table as ss where ss.drf_user_id IS NOT NULL and ss.xpb_user_id is not Null
+                and  ss.location_url like 'https://bets.drf.com/%'
+                group by 1
 
 
 

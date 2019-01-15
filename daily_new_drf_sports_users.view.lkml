@@ -1,4 +1,4 @@
-view: weekly_new_drf_sports_users {
+view: daily_new_drf_sports_users {
 
     derived_table: {
       sql:

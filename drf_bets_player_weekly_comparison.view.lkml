@@ -11,6 +11,11 @@ view: drf_bets_player_weekly_comparison {
                   from public.prod_stream_table as ss where ss.location_url like 'https://bets.drf.com/%' and ss.xpb_user_id is Not Null group by 1;;
     }
 
+#     dimension: drf_user_id {
+#       type: string
+#       sql: ${TABLE}.drf_user_id ;;
+#     }
+
     dimension: xpb_user_id {
       type: string
       sql: ${TABLE}.xpb_user_id ;;

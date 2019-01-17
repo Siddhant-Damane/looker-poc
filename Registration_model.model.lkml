@@ -28,6 +28,11 @@ explore: registration_view {
     relationship: one_to_one
     sql_on: ${drf_customer.broadleaf_customer_id} = ${blc_customer.customer_id} ;;
   }
+
+  join: prod_customers{
+    relationship: many_to_one
+    sql_on: ${registration_view.DRF_Customer_ID} = ${prod_customers.customer_id} ;;
+  }
 }
 
 
@@ -37,6 +42,13 @@ explore: drf_customer {
     sql_on: ${drf_customer.broadleaf_customer_id} = ${blc_customer.customer_id} ;;
   }
 }
+
+# explore: prod_customers {
+#   join: registration_view {
+#     relationship: one_to_one
+#     sql_on: ${prod_customers.customer_id} = ${registration_view.DRF_Customer_ID} ;;
+#   }
+# }
 
 explore: blc_customer {}
 explore: blc_order_view {}

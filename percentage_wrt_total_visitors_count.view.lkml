@@ -1,7 +1,8 @@
 view: percentage_wrt_total_visitors_count {
 
   derived_table: {
-    sql: select Dtable.first_date, (D1table.distinct_drf_customer_id_cond_total), (Dtable.distinct_drf_customer_id_total) from (SELECT
+    sql: select Dtable.first_date,D1table.distinct_drf_customer_id_cond_total, Dtable.distinct_drf_customer_id_total
+    from (SELECT
 TO_CHAR(DATE_TRUNC('week', CONVERT_TIMEZONE('UTC', 'America/New_York', (timestamp 'epoch' + CAST(play_user_count.created_at_ms AS BIGINT) / 1000 * interval '1 second'))), 'YYYY-MM-DD')
 as "first_date",
   COUNT(DISTINCT play_user_count.drf_user_id ) AS "distinct_drf_customer_id_total"
@@ -15,20 +16,26 @@ where Dtable.first_date = D1table.second_date;;
 
   }
 
-  dimension: distinct_drf_customer_id_total {
-    type: number
-    sql: ${TABLE}.distinct_drf_customer_id_total ;;
-  }
-
   dimension: distinct_drf_customer_id_cond_total {
     type: number
     sql: ${TABLE}.distinct_drf_customer_id_cond_total ;;
+  }
+
+  dimension: distinct_drf_customer_id_total {
+    type: number
+    sql: ${TABLE}.distinct_drf_customer_id_total ;;
   }
 
   dimension: first_date {
     type: date
     convert_tz: no
     sql: ${TABLE}.first_date ;;
+  }
+
+  measure: percentage  {
+    type: number
+#     value_format: "2"
+    sql: 100.0 * ${distinct_drf_customer_id_cond_total} / ${distinct_drf_customer_id_total};;
   }
 
 #   dimension: second_date {

@@ -7,7 +7,7 @@ view: percentage_wrt_visitors_ount_login {
         as "first_date",
           COUNT(DISTINCT play_user_count.drf_user_id ) AS "distinct_drf_customer_id_total"
         FROM public.prod_stream_table  AS play_user_count
-        WHERE  (play_user_count.event_type IS NOT NULL) AND (play_user_count.drf_user_id IS NOT NULL) group by 1 ) as Dtable,
+        WHERE  (play_user_count.location_url LIKE 'https://www.drf.com/pp-details%') AND (play_user_count.event_type IS NOT NULL) AND (play_user_count.drf_user_id IS NOT NULL) group by 1 ) as Dtable,
         (SELECT TO_CHAR(DATE_TRUNC('week', CONVERT_TIMEZONE('UTC', 'America/New_York', (timestamp 'epoch' + CAST(play_user_count.created_at_ms AS BIGINT) / 1000 * interval '1 second'))), 'YYYY-MM-DD')  as "second_date",
           COUNT(DISTINCT play_user_count.drf_user_id ) AS "distinct_drf_customer_id_cond_total"
         FROM public.prod_stream_table  AS play_user_count

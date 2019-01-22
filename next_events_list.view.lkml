@@ -27,8 +27,10 @@ view: next_events_list {
                       ELSE 'Other'
                       END != 'Other' and  {% condition event_to_view %} base_table.event_type {% endcondition %}
                     AND (((CAST(drf_play.created_at_ms  AS BIGINT) / 1000) - (CAST(base_table.created_at_ms  AS BIGINT) / 1000)) / 60) BETWEEN 0 AND 5
-                    AND ((((CAST(base_table.created_at_ms AS BIGINT) / 1000) >= ((DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', TIMESTAMP '2018-11-03'))::bigint)) AND (CAST(base_table.created_at_ms AS BIGINT) / 1000) < ((DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', DATEADD(day,1, TIMESTAMP '2018-11-03' )))::bigint)))))
-                    AND ((((CAST(drf_play.created_at_ms AS BIGINT) / 1000) >= ((DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', TIMESTAMP '2018-11-03'))::bigint)) AND (CAST(drf_play.created_at_ms AS BIGINT) / 1000) < ((DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', DATEADD(day,1, TIMESTAMP '2018-11-03' )))::bigint)))))
+                     --AND ((((CAST(base_table.created_at_ms AS BIGINT) / 1000) >= ((DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', TIMESTAMP '2018-11-03'))::bigint)) AND (CAST(base_table.created_at_ms AS BIGINT) / 1000) < ((DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', DATEADD(day,1, TIMESTAMP '2018-11-03' )))::bigint)))))
+                     --AND ((((CAST(drf_play.created_at_ms AS BIGINT) / 1000) >= ((DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', TIMESTAMP '2018-11-03'))::bigint)) AND (CAST(drf_play.created_at_ms AS BIGINT) / 1000) < ((DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', DATEADD(day,1, TIMESTAMP '2018-11-03' )))::bigint)))))
+                    and ((((CAST(base_table.created_at_ms AS BIGINT) / 1000) >= ((DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', DATE_TRUNC('day',CONVERT_TIMEZONE('UTC', 'America/New_York', GETDATE()))))::bigint))
+                    AND (CAST(base_table.created_at_ms AS BIGINT) / 1000) < ((DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', DATEADD(day,1, DATE_TRUNC('day',CONVERT_TIMEZONE('UTC', 'America/New_York', GETDATE())) )))::bigint)))))
                     GROUP BY 1,2,3,4,5,6,7,8,9,10
                     ORDER BY 1 DESC,2 ASC, 3 ASC
                     )

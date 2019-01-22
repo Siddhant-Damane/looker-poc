@@ -27,7 +27,7 @@ where Dtable.first_date = D1table.second_date;;
   }
 
   dimension: first_date {
-    type: date
+    type: string
     convert_tz: no
     sql: ${TABLE}.first_date ;;
   }

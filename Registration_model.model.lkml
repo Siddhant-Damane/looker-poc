@@ -137,6 +137,7 @@ explore: weekly_bets_users {}
 explore: count_of_tracks_for_drf_com {
   sql_always_where: ${drf_user_id} is not Null;;
 }
+explore: percentage_wrt_total_visitors_count {}
 explore:daily_new_drf_sports_users {}
 explore:daily_active_drf_sports_uses{}
 explore: active_users_weekly_comparison {}

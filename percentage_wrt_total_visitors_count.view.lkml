@@ -26,10 +26,9 @@ where Dtable.first_date = D1table.second_date;;
     sql: ${TABLE}.distinct_drf_customer_id_total ;;
   }
 
-  dimension: first_date {
-    type: string
-    convert_tz: no
-    sql: ${TABLE}.first_date ;;
+  dimension:first_date {
+    type: date
+    sql: CAST (${TABLE}.first_date as date) ;;
   }
 
   measure: percentage  {

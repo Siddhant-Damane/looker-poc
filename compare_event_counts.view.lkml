@@ -22,14 +22,25 @@ view: compare_event_counts {
         sql: ${TABLE}.CLICK_ON_PP_Event_Total ;;
       }
 
+
+      measure: Total_CLICK_ON_PP_Event {
+        type: sum
+        sql: ${TABLE}.CLICK_ON_PP_Event_Total ;;
+      }
       dimension: CLICK_ON_WAGER_Event_Total {
 #         group_label: "CLICK_ON_WAGER_Event_Total"
         type: number
         sql: ${TABLE}.CLICK_ON_WAGER_Event_Total ;;
       }
 
+      measure: Total_CLICK_ON_WAGER_Event {
+        type: sum
+        sql: ${TABLE}.CLICK_ON_WAGER_Event_Total ;;
+      }
+
       dimension: first_date {
         type: date
+        label: "Date"
         convert_tz: no
         sql: CAST(${TABLE}.first_date as DATE) ;;
       }

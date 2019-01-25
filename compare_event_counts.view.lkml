@@ -1,18 +1,18 @@
 view: compare_event_counts {
 
     derived_table: {
-      sql: select Dtable.first_date,Dtable.CLICK_ON_PP_Event_Total, D1table.CLICK_ON_WAGER_Event_Total
+      sql: select Dtable.first_date,Dtable.CLICK_ON_PP_Event_Total, D1table.CLICK_ON_WAGER_Event_Total, Dtable.location_url
             from (SELECT
         TO_CHAR(DATE_TRUNC('week', CONVERT_TIMEZONE('UTC', 'America/New_York', (timestamp 'epoch' + CAST(play_user_count.created_at_ms AS BIGINT) / 1000 * interval '1 second'))), 'YYYY-MM-DD')
-        as "first_date",
+        as "first_date", play_user_count.location_url,
           count(play_user_count.event_type ) AS "CLICK_ON_PP_Event_Total"
         FROM public.prod_stream_table  AS play_user_count
-        WHERE  (play_user_count.event_type = 'CLICK_ON_PP') AND (play_user_count.drf_user_id IS NOT NULL) group by 1 ) as Dtable,
+        WHERE  (play_user_count.event_type = 'CLICK_ON_PP') AND (play_user_count.drf_user_id IS NOT NULL) group by 1,2 ) as Dtable,
         (SELECT TO_CHAR(DATE_TRUNC('week', CONVERT_TIMEZONE('UTC', 'America/New_York', (timestamp 'epoch' + CAST(play_user_count.created_at_ms AS BIGINT) / 1000 * interval '1 second'))), 'YYYY-MM-DD')  as "second_date",
-          count(play_user_count.event_type ) AS "CLICK_ON_WAGER_Event_Total"
+          play_user_count.location_url, count(play_user_count.event_type ) AS "CLICK_ON_WAGER_Event_Total"
         FROM public.prod_stream_table  AS play_user_count
-        WHERE (play_user_count.event_type = 'CLICK_ON_WAGER') AND (play_user_count.drf_user_id IS NOT NULL) group by 1) as D1table
-        where Dtable.first_date = D1table.second_date;;
+        WHERE (play_user_count.event_type = 'CLICK_ON_WAGER') AND (play_user_count.drf_user_id IS NOT NULL) group by 1,2) as D1table
+        where Dtable.first_date = D1table.second_date and Dtable.location_url = D1table.location_url  ;;
 
       }
 
@@ -22,6 +22,10 @@ view: compare_event_counts {
         sql: ${TABLE}.CLICK_ON_PP_Event_Total ;;
       }
 
+      dimension: location_url {
+        type: string
+        sql: ${TABLE}.location_url ;;
+      }
 
       measure: Total_CLICK_ON_PP_Event {
         type: sum

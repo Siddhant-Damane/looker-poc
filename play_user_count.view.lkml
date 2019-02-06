@@ -12,6 +12,13 @@ view: play_user_count {
 
   }
 
+  measure: location_url_strip {
+    description: "location_url"
+    type: string
+    sql: REPLACE(REGEXP_SUBSTR(${TABLE}.location_url,'//[^/\\\,=@\\+]+\\.[^/:;,\\\\\(\\)]+'),'//','') ;;
+
+  }
+
   dimension: created_at {
     description: "When the event happened"
     type: string
@@ -33,6 +40,17 @@ view: play_user_count {
     sql: ${event_type} ;;
   }
 
+#   dimension: event_type_new {
+#     type: string
+#     sql: ${TABLE}.event_type ;;
+#   }
+#
+#   measure: total_event_count_new{
+#     type: count
+#     sql: ${event_type_new} ;;
+#   }
+#
+
   dimension_group: created_at_ms_formatted {
     type: time
     datatype: epoch
@@ -50,7 +68,7 @@ view: play_user_count {
     description: "count of user event"
     type: count_distinct
     sql: ${DRF_Customer_ID} ;;
-    drill_fields: []
+    drill_fields: [DRF_Customer_ID]
   }
 
   dimension: XPB_ID {

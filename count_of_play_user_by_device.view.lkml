@@ -75,6 +75,11 @@ view: count_of_play_user_by_device {
     drill_fields: []
   }
 
+  dimension: event_type {
+    description: "Event Type"
+    type:  string
+    sql: ${TABLE}.event_type;;
+  }
 
 }
 

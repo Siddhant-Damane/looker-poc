@@ -9,14 +9,14 @@ view: percentage_wrt_visitors_ount_login {
         FROM public.prod_stream_table  AS play_user_count
         WHERE  (play_user_count.location_url LIKE 'https://www.drf.com/pp-details%') AND (play_user_count.event_type is not Null) AND (play_user_count.drf_user_id IS NOT NULL)  and
         ((((CAST(play_user_count.created_at_ms AS BIGINT) / 1000) >= ((DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', DATEADD(week,-7, DATE_TRUNC('week', DATE_TRUNC('day',CONVERT_TIMEZONE('UTC', 'America/New_York', GETDATE()))) )))::bigint))
-        AND (CAST(play_user_count.created_at_ms AS BIGINT) / 1000) < ((DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', DATEADD(week,8, DATEADD(week,-7, DATE_TRUNC('week', DATE_TRUNC('day',CONVERT_TIMEZONE('UTC', 'America/New_York', GETDATE()))) ) )))::bigint)))))
+        AND (CAST(play_user_count.created_at_ms AS BIGINT) / 1000) < ((DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', DATEADD(week,7, DATEADD(week,-7, DATE_TRUNC('week', DATE_TRUNC('day',CONVERT_TIMEZONE('UTC', 'America/New_York', GETDATE()))) ) )))::bigint)))))
         group by 1 ) as Dtable,
         (SELECT TO_CHAR(DATE_TRUNC('week', CONVERT_TIMEZONE('UTC', 'America/New_York', (timestamp 'epoch' + CAST(play_user_count.created_at_ms AS BIGINT) / 1000 * interval '1 second'))), 'YYYY-MM-DD')  as "second_date",
           COUNT(DISTINCT play_user_count.drf_user_id ) AS "distinct_drf_customer_id_cond_total"
         FROM public.prod_stream_table  AS play_user_count
         WHERE (play_user_count.event_type = 'CLICK_ON_BET_NOW') AND (play_user_count.drf_user_id IS NOT NULL)  and (play_user_count.location_url LIKE 'https://www.drf.com/pp-details%') and
         ((((CAST(play_user_count.created_at_ms AS BIGINT) / 1000) >= ((DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', DATEADD(week,-7, DATE_TRUNC('week', DATE_TRUNC('day',CONVERT_TIMEZONE('UTC', 'America/New_York', GETDATE()))) )))::bigint))
-        AND (CAST(play_user_count.created_at_ms AS BIGINT) / 1000) < ((DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', DATEADD(week,8, DATEADD(week,-7, DATE_TRUNC('week', DATE_TRUNC('day',CONVERT_TIMEZONE('UTC', 'America/New_York', GETDATE()))) ) )))::bigint)))))
+        AND (CAST(play_user_count.created_at_ms AS BIGINT) / 1000) < ((DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', DATEADD(week,7, DATEADD(week,-7, DATE_TRUNC('week', DATE_TRUNC('day',CONVERT_TIMEZONE('UTC', 'America/New_York', GETDATE()))) ) )))::bigint)))))
         group by 1 ) as D1table
         where Dtable.first_date = D1table.second_date;;
 

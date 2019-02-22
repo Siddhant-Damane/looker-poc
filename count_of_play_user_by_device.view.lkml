@@ -81,6 +81,12 @@ view: count_of_play_user_by_device {
     sql: ${TABLE}.event_type;;
   }
 
+measure: distinct_event_count {
+  description: "count of user event"
+  type: count_distinct
+  sql: ${event_type} ;;
+  drill_fields: []
+}
 }
 
 # view: count_of_play_user_by_device {

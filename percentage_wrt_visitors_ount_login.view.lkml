@@ -1,7 +1,7 @@
 view: percentage_wrt_visitors_ount_login {
 
     derived_table: {
-      sql: select Dtable.first_date,D1table.distinct_drf_customer_id_cond_total, Dtable.distinct_drf_customer_id_total
+      sql: select Dtable.first_date, Dtable.first_date,D1table.distinct_drf_customer_id_cond_total, Dtable.distinct_drf_customer_id_total
             from (SELECT
         TO_CHAR(DATE_TRUNC('week', CONVERT_TIMEZONE('UTC', 'America/New_York', (timestamp 'epoch' + CAST(play_user_count.created_at_ms AS BIGINT) / 1000 * interval '1 second'))), 'YYYY-MM-DD')
         as "first_date",

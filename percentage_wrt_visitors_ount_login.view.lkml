@@ -43,7 +43,7 @@ view: percentage_wrt_visitors_ount_login {
       }
 
       dimension: first_date {
-        type: string
+        type: date
         convert_tz: no
         sql: ${TABLE}.first_date ;;
       }

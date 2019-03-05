@@ -120,6 +120,8 @@ explore: user_count {
 #   sql_always_where: ${DRF_Customer_ID} is not Null;;
 }
 
+explore: non_logged_in_users_per_link{}
+explore: logged_in_users_per_link {}
 # Bets Dashboard Views
 # explore: bets_user_count {
 #   sql_always_where: ${DRF_Customer_ID} is not Null;;

@@ -19,6 +19,12 @@ view: user_tracking_id_view {
     sql:split_part(${location_url}, '/', 3);;
   }
 
+  dimension: DRF_Customer_ID {
+    description: "DRF Customer ID"
+    type: string
+    sql:  ${TABLE}.drf_user_id ;;
+  }
+
   dimension: created_at_ms {
     type: number
     sql: ${TABLE}.created_at_ms ;;

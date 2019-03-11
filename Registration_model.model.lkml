@@ -67,7 +67,8 @@ explore: blc_product {}
 explore: blc_sku {}
 explore: user_tracking_id_view {}
 explore: user_funnel_view {}
-
+explore: uuid_1{}
+explore: uuid_2 {}
 #Paly Dashboard Views
 explore: play_user_count {
 #   sql_always_where: ${DRF_Customer_ID} is not Null;;

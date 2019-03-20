@@ -92,7 +92,7 @@ view: registration_view {
     description: "count of drf_customer_Id"
     type: count_distinct
     sql: ${User_Tracking_ID} ;;
-    drill_fields: []
+    drill_fields: [User_Tracking_ID]
   }
 
   measure: distinct_xpb_Id {

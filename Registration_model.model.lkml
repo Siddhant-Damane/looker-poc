@@ -69,6 +69,15 @@ explore: user_tracking_id_view {}
 explore: user_funnel_view {}
 explore: uuid_1{}
 explore: uuid_2 {}
+explore: device_classification {}
+explore: site_wide_visitors_feb{}
+explore: site_wide_visitors_weekly_comparison_feb{}
+explore: home_visitors_each_week_feb {}
+explore: drf_bets_visitors_weekly_comparison_feb {}
+explore: home_players_each_week_feb {}
+explore: weekly_comparison_global_with_location_filter_feb {}
+explore: drf_bets_player_weekly_comparison_bets{}
+explore: site_wide_players_weekly_comparison_feb {}
 #Paly Dashboard Views
 explore: play_user_count {
 #   sql_always_where: ${DRF_Customer_ID} is not Null;;

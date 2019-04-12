@@ -2,7 +2,7 @@ view: count_of_articles_read_by_customers {
   derived_table: {
     sql: SELECT
         registration_view.drf_user_id  AS "registration_view.drf_customer_id",
-         split_part(registration_view.location_url, '?type', 1) AS "registration_view.unique_location_url",
+         split_part(registration_view.location_url, '?type', 1) AS "registration_view.unique_location_url"
 
       FROM public.prod_stream_table  AS registration_view
 

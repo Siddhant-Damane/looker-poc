@@ -1,4 +1,4 @@
-view: count_of_articles_read_by_customers_in_2019_ {
+view: count_of_articles_read_by_customers {
   derived_table: {
     sql: SELECT
         registration_view.drf_user_id  AS "registration_view.drf_customer_id_1",

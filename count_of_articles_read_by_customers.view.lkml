@@ -1,4 +1,4 @@
-view: articles_read_by_customers {
+view: count_of_articles_read_by_customers {
   derived_table: {
     sql: SELECT registration_view.drf_user_id AS "registraton_view.drf_customer_id",
       count(distinct split_part(registration_view.location_url, '?type', 1)) AS "split_registration_view.location_url"

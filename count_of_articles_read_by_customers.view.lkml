@@ -8,7 +8,6 @@ view: count_of_articles_read_by_customers {
       WHERE (registration_view.location_url LIKE '%/news/preview/%') AND ((split_part(registration_view.location_url, '?type', 1) is NOT NULL AND LENGTH(split_part(registration_view.location_url, '?type', 1)) <> 0) AND ((CAST(registration_view.created_at_ms AS BIGINT) / 1000 >= DATE_PART(epoch, CONVERT_TIMEZONE('America/New_York', 'UTC', TIMESTAMP '2019-01-01'))::bigint)))
       GROUP BY 1
       ORDER BY 1
-      limit 5000
        ;;
   }
 

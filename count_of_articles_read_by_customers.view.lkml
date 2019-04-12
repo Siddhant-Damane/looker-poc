@@ -9,7 +9,7 @@ view: count_of_articles_read_by_customers {
 
       WHERE
         (registration_view.location_url LIKE '%/news/preview%') AND ((split_part(registration_view.location_url, '?type', 1) is NOT NULL AND LENGTH(split_part(registration_view.location_url, '?type', 1)) <> 0))
-        group by 1,2
+        group by 1,2,3
       ORDER BY 1
        ;;
   }

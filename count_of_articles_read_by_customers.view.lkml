@@ -1,7 +1,7 @@
 view: count_of_articles_read_by_customers {
   derived_table: {
     sql: SELECT
-        registration_view.drf_user_id  AS "registration_view.drf_customer_id_1",
+        registration_view.drf_user_id  AS "registration_view.drf_customer_id",
          split_part(registration_view.location_url, '?type', 1) AS "registration_view.unique_location_url",
         DATE(CONVERT_TIMEZONE('UTC', 'America/New_York', (timestamp 'epoch' + CAST(registration_view.created_at_ms AS BIGINT) / 1000 * interval '1 second'))) AS "registration_view.created_at_ms_formatted_date"
       FROM public.prod_stream_table  AS registration_view
@@ -18,9 +18,9 @@ view: count_of_articles_read_by_customers {
     drill_fields: [detail*]
   }
 
-  dimension: registration_view_drf_customer_id_1 {
+  dimension: registration_view_drf_customer_id {
     type: number
-    sql: ${TABLE}."registration_view.drf_customer_id_1" ;;
+    sql: ${TABLE}."registration_view.drf_customer_id" ;;
   }
 
   dimension: registration_view_unique_location_url {
@@ -34,6 +34,6 @@ view: count_of_articles_read_by_customers {
   }
 
   set: detail {
-    fields: [registration_view_drf_customer_id_1, registration_view_unique_location_url, registration_view_created_at_ms_formatted_date]
+    fields: [registration_view_drf_customer_id, registration_view_unique_location_url, registration_view_created_at_ms_formatted_date]
   }
 }

@@ -97,6 +97,9 @@ explore: play_event_count_by_user {
 explore: count_of_tracks_per_user {
   sql_always_where: ${drf_user_id} is not Null;;
 }
+explore: count_of_articles_read_by_customers {
+  #sql_always_where: ${DRF_Customer_ID} is not Null;;
+}
 explore: single_page_view_users {
   sql_always_where: ${drf_user_id} is not Null;;
 }

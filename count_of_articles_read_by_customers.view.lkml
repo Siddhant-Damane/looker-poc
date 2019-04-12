@@ -15,7 +15,7 @@ view: count_of_articles_read_by_customers {
   }
 
   measure: count {
-    type: count
+    type: count_distinct
     drill_fields: [detail*]
   }
 

@@ -37,6 +37,5 @@ view: count_of_articles_read_by_customers {
   set: detail {
     fields: [registration_view_drf_customer_id, registration_view_unique_location_url, registration_view_created_at_ms_formatted_date]
   }
-}
 
-explore: count_of_articles_read_by_customers {cancel_grouping_fields:[count_of_articles_read_by_customers.registration_view_unique_location_url]}
+}

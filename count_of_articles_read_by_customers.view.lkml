@@ -15,7 +15,7 @@ view: count_of_articles_read_by_customers {
   }
 
   measure: count {
-    type: count_distinct
+    type: count
     drill_fields: [detail*]
   }
 
@@ -39,4 +39,4 @@ view: count_of_articles_read_by_customers {
   }
 }
 
-#explore: count_of_articles_read_by_customers {cancel_grouping_fields:[count_of_articles_read_by_customers.registration_view_unique_location_url, count_of_articles_read_by_customers.registration_view_created_at_ms_formatted_date]}
+explore: count_of_articles_read_by_customers {cancel_grouping_fields:[count_of_articles_read_by_customers.registration_view_unique_location_url]}

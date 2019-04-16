@@ -3,7 +3,9 @@ view: count_of_articles_read_by_customers {
     sql: SELECT
         registration_view.drf_user_id  AS "registration_view.drf_customer_id",
          split_part(registration_view.location_url, '?type', 1) AS "registration_view.unique_location_url",
-        DATE(CONVERT_TIMEZONE('UTC', 'America/New_York', (timestamp 'epoch' + CAST(registration_view.created_at_ms AS BIGINT) / 1000 * interval '1 second'))) AS "registration_view.created_at_ms_formatted_date"
+        DATE(CONVERT_TIMEZONE('UTC', 'America/New_York', (timestamp 'epoch' + CAST(registration_view.created_at_ms AS BIGINT) / 1000 * interval '1 second'))) AS "registration_view.created_at_ms_formatted_date",
+          TO_CHAR(DATE_TRUNC('month', CONVERT_TIMEZONE('UTC', 'America/New_York', (timestamp 'epoch' + CAST(registration_view.created_at_ms AS BIGINT) / 1000 * interval '1 second'))), 'YYYY-MM') AS "registration_view.created_at_ms_formatted_month"
+
 
       FROM public.prod_stream_table  AS registration_view
 
@@ -34,8 +36,13 @@ view: count_of_articles_read_by_customers {
     sql: ${TABLE}."registration_view.created_at_ms_formatted_date" ;;
   }
 
+  dimension: registration_view_created_at_ms_formatted_month {
+    type: date
+    sql: ${TABLE}."registration_view.created_at_ms_formatted_month" ;;
+  }
+
   set: detail {
-    fields: [registration_view_drf_customer_id, registration_view_unique_location_url, registration_view_created_at_ms_formatted_date]
+    fields: [registration_view_drf_customer_id, registration_view_unique_location_url, registration_view_created_at_ms_formatted_date,registration_view_created_at_ms_formatted_month]
   }
 
 }

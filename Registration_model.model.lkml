@@ -99,7 +99,7 @@ explore: count_of_tracks_per_user {
 }
 explore: count_of_articles_read_by_customers {
   #sql_always_where: ${DRF_Customer_ID} is not Null;;
- cancel_grouping_fields:[count_of_articles_read_by_customers.registration_view_unique_location_url, count_of_articles_read_by_customers.registration_view_created_at_ms_formatted_date]
+ cancel_grouping_fields:[count_of_articles_read_by_customers.registration_view_unique_location_url]
 }
 explore: single_page_view_users {
   sql_always_where: ${drf_user_id} is not Null;;

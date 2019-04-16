@@ -33,7 +33,7 @@ view: count_of_articles_read_by_customers {
 
 
   dimension: registration_view_created_at_ms_formatted_month {
-    type: date
+    type: date_month
     sql: ${TABLE}."registration_view.created_at_ms_formatted_month" ;;
   }
 

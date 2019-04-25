@@ -134,6 +134,8 @@ explore: user_count {
 #   sql_always_where: ${DRF_Customer_ID} is not Null;;
 }
 
+explore: drf_5_card_10_card_classic_harness_formulator {}
+
 explore: non_logged_in_users_per_link{}
 explore: logged_in_users_per_link {}
 # Bets Dashboard Views

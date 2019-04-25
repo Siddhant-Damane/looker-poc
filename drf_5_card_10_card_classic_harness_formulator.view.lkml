@@ -17,7 +17,7 @@ view: drf_5_card_10_card_classic_harness_formulator {
 
   measure: count {
     type: count
-    drill_fields: [detail*]
+    drill_fields: [sales_quantity,sales_sales]
   }
 
   dimension: sales_submit_month {
@@ -25,17 +25,17 @@ view: drf_5_card_10_card_classic_harness_formulator {
     sql: ${TABLE}."sales.submit_month" ;;
   }
 
-  measure: sales_quantity {
+  dimension: sales_quantity {
     type: number
     sql: ${TABLE}."sales.quantity" ;;
   }
 
-  measure: sales_sales {
+  dimension: sales_sales {
     type: number
     sql: ${TABLE}."sales.sales" ;;
   }
 
   set: detail {
-    fields: [sales_submit_month]
+    fields: [sales_submit_month,sales_quantity,sales_sales]
   }
 }

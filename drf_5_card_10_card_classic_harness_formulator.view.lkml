@@ -25,12 +25,12 @@ view: drf_5_card_10_card_classic_harness_formulator {
     sql: ${TABLE}."sales.submit_month" ;;
   }
 
-  dimension: sales_quantity {
+  measure: sales_quantity {
     type: number
     sql: ${TABLE}."sales.quantity" ;;
   }
 
-  dimension: sales_sales {
+  measure: sales_sales {
     type: number
     sql: ${TABLE}."sales.sales" ;;
   }

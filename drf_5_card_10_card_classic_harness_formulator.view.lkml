@@ -36,6 +36,6 @@ view: drf_5_card_10_card_classic_harness_formulator {
   }
 
   set: detail {
-    fields: [sales_submit_month, sales_quantity, sales_sales]
+    fields: [sales_submit_month]
   }
 }

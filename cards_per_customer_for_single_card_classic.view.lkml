@@ -8,8 +8,8 @@ view: cards_per_customer_for_single_card_classic {
       -- use existing product in looker_scratch.LR$2QDU13X8JVQ74JAF46EC_product
 
       select
-        this.submit_month_name as "Month",
-        count(distinct this.drf_customer_id) as "No. of Customers" ,
+     this.submit_month_name as "Month",
+        this.drf_customer_id as "No. of Customers" ,
         this.quantity as "No. of Cards"
       from (
       SELECT
@@ -25,31 +25,30 @@ view: cards_per_customer_for_single_card_classic {
       ORDER BY 2
       ) AS this
 
-      group by 1,3
+      group by 1,2,3
        ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-  }
+
   dimension_group: submit {
     type: time
     timeframes: [day_of_week,date, week, month, month_name,year, week_of_year]
     sql: ${TABLE}.submit_date ;;
     }
-  dimension: month {
-    type: string
-    sql: ${TABLE}.month ;;
-  }
 
-  dimension: no__of_customers {
-    type: number
+dimension: month {
+  type: string
+  label: "Month"
+  sql:${TABLE}.month  ;;
+}
+
+  measure: no__of_customers {
+    type: count_distinct
     label: "no. of customers"
     sql: ${TABLE}."no. of customers" ;;
   }
 
-  measure: no__of_cards {
+  dimension: no__of_cards {
     type: number
     label: "no. of cards"
     sql: ${TABLE}."no. of cards" ;;
